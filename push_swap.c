@@ -27,9 +27,8 @@ void	ft_stack_create_add(int date, t_stack **stack)
 		*stack = tmp;
 	else
 	{
-		while (p->next != NULL)
-			p = p->next;
-		p->next = tmp;
+		tmp->next = *stack;
+		*stack = tmp;
 	}
 }
 
@@ -90,9 +89,7 @@ void	ft_print_stack(t_stack **stack)
 	t_stack	*tmp;
 
 	tmp = *stack;
-	printf ("Item a stack: %d\n", tmp->num);
-	tmp = (*stack)->next;
-	while (tmp != *stack)
+	while (tmp != NULL)
 	{
 		printf ("Item a stack: %d\n", tmp->num);
 		tmp = tmp->next;
@@ -128,7 +125,7 @@ int	main(int ag, char **av)
 			i++;
 		}
 		ft_free(str);
-		ft_next_back(&stack);
+	//	ft_next_back(&stack);
 		ft_print_stack(&stack);
 	}
 	return (0);
