@@ -12,11 +12,28 @@
 
 #include "push_swap.h"
 
+void	print_error()
+{
+	write(1, "ERROR", 5);
+	exit(0);
+}
+
+void	check_dublies(int num, t_stack *stack)
+{
+	while (stack != NULL)
+	{
+		if (num == stack->num)
+			print_error();
+		stack = stack->next;
+	}
+}
+
 void	ft_stack_create_add(int date, t_stack **stack)
 {
 	t_stack	*tmp;
 	t_stack	*p;
 
+	check_dublies(date, *stack);
 	p = *stack;
 	tmp = malloc(sizeof(t_stack));
 	if (!tmp)
@@ -40,12 +57,6 @@ void	ft_next_back(t_stack **stack)
 	while (tmp->next != NULL)
 		tmp = tmp->next;
 	tmp->next = *stack;
-}
-
-void	print_error()
-{
-	write(1, "ERROR", 5);
-	exit(0);
 }
 
 int	ft_checknum(unsigned long long int num, int negative)
@@ -84,6 +95,19 @@ long int	ft_atoi(const char *str)
 	return (ft_checknum(num, negative));
 }
 
+void	free_stack(t_stack **stack)
+{
+	t_stack	*tmp;
+
+	tmp = *stack;
+	while (*stack != NULL)
+	{
+		*stack = (*stack)->next;
+		free(tmp);
+		tmp = *stack;
+	}
+}
+
 void	ft_print_stack(t_stack **stack)
 {
 	t_stack	*tmp;
@@ -94,37 +118,32 @@ void	ft_print_stack(t_stack **stack)
 		printf ("Item a stack: %d\n", tmp->num);
 		tmp = tmp->next;
 	}
+	free_stack(stack);
 }
 
 int	main(int ag, char **av)
 {
-	t_stack	*stack;
-	int		i;
-	int		j;
-	char	**str;
+	t_stack		*stack;
+	int			i;
+	static int	j;
+	char		**str;
 
-	j = 0;
 	stack = NULL;
-	i = 1;
 	if (ag < 2)
 		write (1, "ERROR", 5);
 	else
 	{
 		i = 1;
-		while (av[i] != '\0')
+		while (av[i] != NULL)
 		{
-			str = ft_split(av[i], ' ');
+			str = ft_split(av[i++], ' ');
 			if (str[j] == 0)
 				print_error();
 			while (str[j] != 0)
-			{
-				ft_stack_create_add(ft_atoi(str[j]), &stack);
-				j++;
-			}
+				ft_stack_create_add(ft_atoi(str[j++]), &stack);
 			j = 0;
-			i++;
+			str = ft_free(str);
 		}
-		ft_free(str);
 	//	ft_next_back(&stack);
 		ft_print_stack(&stack);
 	}

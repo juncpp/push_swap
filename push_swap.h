@@ -21,7 +21,7 @@ typedef struct stack
 	int				num;
 	struct stack	*next;
 }	t_stack;
-
+void	print_error();
 char	**ft_split(char const *s, char c);
 char	*ft_copy(char *str, const char *s, char c, int i);
 char	**ft_free(char **str);
