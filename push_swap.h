@@ -19,9 +19,24 @@
 typedef struct stack
 {
 	int				num;
+	int				index;
 	struct stack	*next;
+	struct stack	*prev;
 }	t_stack;
-void	print_error();
+
+typedef struct stack_2
+{
+	int				num;
+	int				index;
+	struct stack_2	*next;
+	struct stack_2	*prev;
+	int				score;
+}	t_stack_2;
+void	ft_index_2(t_stack_2 **stack_b);
+void	ft_index(t_stack **stack);
+void	ft_circle_2(t_stack_2 **stack_b);
+void	start_algorithm(t_stack **stack);
+void	print_error(void);
 char	**ft_split(char const *s, char c);
 char	*ft_copy(char *str, const char *s, char c, int i);
 char	**ft_free(char **str);
