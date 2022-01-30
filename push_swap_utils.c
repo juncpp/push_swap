@@ -121,7 +121,7 @@ void	ft_index_2(t_stack_2 **stack_b)
 
 void	start_algorithm(t_stack **stack)
 {
-	t_stack_2	*stack_b;
+	t_stack	*stack_b;
 
 	stack_b = NULL;
 	ft_min(stack, &stack_b);

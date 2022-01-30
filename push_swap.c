@@ -126,7 +126,7 @@ void	ft_print_stack(t_stack **stack)
 		tmp = tmp->next;
 	}
 	printf ("Item a stack: %d  index item = %d\n", tmp->num, tmp->index);
-	free_stack(stack);
+//	free_stack(stack);
 }
 
 t_stack	**ft_circle(t_stack **stack)
@@ -187,11 +187,12 @@ int	main(int ag, char **av)
 
 	stack = NULL;
 	if (ag < 2)
-		write (1, "ERROR", 5);
+		return (0);
 	else
 	{
 		ft_valid(av, &stack);
 		ft_print_stack(&stack);
+		ft_stack_in_arr(&stack);
 	//	printf ("HEAD = %d\n", stack->num);
 	//	printf ("_______________________\n");
 	//	start_algorithm(&stack);
