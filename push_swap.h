@@ -35,13 +35,17 @@ typedef struct stack
 // }	t_stack_2;
 
 void	ft_print_stack(t_stack **stack);
-void	ft_index_2(t_stack **stack_b);
+//void	ft_index_2(t_stack **stack_b);
 void	ft_index(t_stack **stack);
 //void	ft_circle_2(t_stack_2 **stack_b);
 //void	start_algorithm(t_stack **stack);
 int		*ft_sort_arr(int *arr, int index);
-void	ft_stack_in_arr(t_stack **stack);
+//void	ft_stack_in_arr(t_stack **stack);
+t_stack	*ft_stack_in_arr(t_stack **stack);
+void    ra(t_stack **stack, t_stack *tmp);
+void    rra(t_stack **stack, t_stack *tmp);
 //
+void    ft_score(t_stack **stack, t_stack **stack_b);
 void	print_error(void);
 char	**ft_split(char const *s, char c);
 char	*ft_copy(char *str, const char *s, char c, int i);

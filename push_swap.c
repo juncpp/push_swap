@@ -122,10 +122,10 @@ void	ft_print_stack(t_stack **stack)
 	tmp = *stack;
 	while (tmp->next != *stack)
 	{
-		printf ("Item a stack: %d  index item = %d\n", tmp->num, tmp->index);
+		printf ("Item a stack: %d  index item = %d  score intem = %d\n", tmp->num, tmp->index, tmp->score);
 		tmp = tmp->next;
 	}
-	printf ("Item a stack: %d  index item = %d\n", tmp->num, tmp->index);
+	printf ("Item a stack: %d  index item = %d  score intem = %d\n", tmp->num, tmp->index, tmp->score);
 //	free_stack(stack);
 }
 
@@ -156,7 +156,7 @@ void	ft_valid(char **av, t_stack **stack)
 		str = ft_split(av[i++], ' ');
 		if (str[j] == 0)
 			print_error();
-		while (str[j] != '\0')
+		while (str[j] != NULL)
 			stack = ft_stack_create_add(ft_atoi(str[j++]), stack);
 		j = 0;
 		str = ft_free(str);
@@ -184,6 +184,7 @@ void	ft_index(t_stack **stack)
 int	main(int ag, char **av)
 {
 	t_stack		*stack;
+	t_stack		*stack_b;
 
 	stack = NULL;
 	if (ag < 2)
@@ -191,8 +192,9 @@ int	main(int ag, char **av)
 	else
 	{
 		ft_valid(av, &stack);
-		ft_print_stack(&stack);
-		ft_stack_in_arr(&stack);
+	//	ft_print_stack(&stack);
+		stack_b = ft_stack_in_arr(&stack);
+		ft_score(&stack, &stack_b);
 	//	printf ("HEAD = %d\n", stack->num);
 	//	printf ("_______________________\n");
 	//	start_algorithm(&stack);
