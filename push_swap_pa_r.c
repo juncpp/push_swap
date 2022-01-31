@@ -139,33 +139,40 @@ int check_list(t_stack **stack, t_stack **stack_b)
     return (0);
 }
 
+int ft_sorting_final(t_stack **stack)
+{
+    t_stack *tmp;
+
+    tmp = *stack;
+    while (tmp->next != *stack)
+    {
+        if (tmp->index == -1)
+        {
+            if (tmp->score == 0)
+                return(0);
+            else
+            {
+            if (tmp->prev->score >= tmp->score)
+                rra(stack, tmp);
+            else
+                ra(stack, tmp);
+            return (0);
+            }
+        }
+        tmp = tmp->next;
+    }
+    rra(stack, tmp);
+    return(0);
+}
+
 void    ft_score(t_stack **stack, t_stack **stack_b)
 {
-
     ft_score_a_b(stack);
     if (*stack_b != NULL)
         ft_score_a_b(stack_b);
-//    printf ("BEFORE\n");
-//    ft_print_stack(stack);
-//    printf ("AFTER\n");
     while (*stack_b != NULL)
-    {
         check_list(stack, stack_b);
-    //    printf ("AFTER\n");
-    //     ft_print_stack(stack);
-    }
-    // check_list(stack, stack_b);
-    ft_print_stack(stack);
-    //  printf ("botm is stack_b\n");
-    //  if (*stack_b == NULL)
-    //     printf ("YES\n");
-    // printf ("AFTER\n");
-    // check_list(stack, stack_b);
-    // ft_print_stack(stack);
-    // printf ("botm is stack_b\n");
-    // if (*stack_b != NULL)
-    //     ft_print_stack(stack_b);
-  //  printf ("WTF\n");
-  //  printf ("num HEAD = %d", (*stack_b)->next->next->num);
-//    ft_print_stack(stack_b);
+    ft_sorting_final(stack);
+//    ft_print_stack(stack);
+
 }

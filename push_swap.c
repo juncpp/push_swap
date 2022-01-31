@@ -126,7 +126,6 @@ void	ft_print_stack(t_stack **stack)
 		tmp = tmp->next;
 	}
 	printf ("Item a stack: %d  index item = %d  score intem = %d\n", tmp->num, tmp->index, tmp->score);
-//	free_stack(stack);
 }
 
 t_stack	**ft_circle(t_stack **stack)
@@ -140,8 +139,6 @@ t_stack	**ft_circle(t_stack **stack)
 	(*stack)->prev = first;
 	return (stack);
 }
-
-// void (*f) (t_stack **)
 
 void	ft_valid(char **av, t_stack **stack)
 {
@@ -163,7 +160,6 @@ void	ft_valid(char **av, t_stack **stack)
 	}
 	stack = ft_circle(stack);
 	ft_index(stack);
-	//(void) f(stack);
 }
 
 void	ft_index(t_stack **stack)
@@ -192,12 +188,8 @@ int	main(int ag, char **av)
 	else
 	{
 		ft_valid(av, &stack);
-	//	ft_print_stack(&stack);
 		stack_b = ft_stack_in_arr(&stack);
 		ft_score(&stack, &stack_b);
-	//	printf ("HEAD = %d\n", stack->num);
-	//	printf ("_______________________\n");
-	//	start_algorithm(&stack);
 	}
 	return (0);
 }

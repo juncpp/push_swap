@@ -1,12 +1,5 @@
 #include "push_swap.h"
 
-
-// t_stack	**ft_remove_list(t_stack **stack, int max, int min)
-// {
-
-// 	return (stack);
-// }
-
 void	ft_circle_2(t_stack **stack_b)
 {
 	t_stack	*first;
@@ -17,7 +10,6 @@ void	ft_circle_2(t_stack **stack_b)
 	first->next = *stack_b;
 	(*stack_b)->prev = first;
 	ft_index(stack_b);
-	//return (stack_b);
 }
 
 
@@ -207,8 +199,6 @@ void	sa (t_stack **stack)
 	tmp2->prev = (*stack);
 	*stack = tmp;
 	write (1, "sa\n", 3);
-	//ft_print_stack(stack);
-
 }
 
 t_stack	*ft_stack_in_arr(t_stack **stack)
@@ -226,11 +216,5 @@ t_stack	*ft_stack_in_arr(t_stack **stack)
 	if (check_a((*stack)->num, (*stack)->next->num, (*stack)->prev->num))
 	 	sa(stack);
 	stack = ft_index_min(stack, arr[0]);
-//	ft_print_stack(&stack_b);
-//	printf ("a________________a\n");
-	//ft_remove_list(stack, arr[index], arr[0]);
-//	ft_print_stack(stack);
-//	printf ("________________\n");
-//	ft_print_arr(arr, index);
 	return (stack_b);
 }
