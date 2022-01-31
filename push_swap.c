@@ -14,7 +14,7 @@
 
 void	print_error(void)
 {
-	write(1, "ERROR", 5);
+	write(2, "Error\n", 6);
 	exit(0);
 }
 
@@ -80,13 +80,12 @@ long int	ft_atoi(const char *str)
 	num = 0;
 	i = 0;
 	negative = 1;
-	while (str[i] == '-' || str[i] == '+')
+	if (str[i] == '-')
 	{
-		if (str[i] == '-')
-			negative = -negative;
+		negative = -negative;
 		i++;
 	}
-	if (str[i] == '\0')
+	if (str[i] == '\0' || str[i] == '-' || str[i] == '+')
 		print_error();
 	while (str[i] >= '0' && str[i] <= '9')
 	{
@@ -184,10 +183,12 @@ int	main(int ag, char **av)
 
 	stack = NULL;
 	if (ag < 2)
-		return (0);
+		exit (0);
 	else
 	{
 		ft_valid(av, &stack);
+		// printf ("Stack \n");
+		// ft_print_stack(&stack);
 		stack_b = ft_stack_in_arr(&stack);
 		ft_score(&stack, &stack_b);
 	}

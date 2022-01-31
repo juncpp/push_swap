@@ -43,8 +43,9 @@ void	ft_rb_pb(t_stack *tmp, t_stack **stack_b, int num, int med)
 	}
 }
 
-void	ft_stack_2_create_add(t_stack *tmp, t_stack **stack_b, int med)
+int	ft_stack_2_create_add(t_stack *tmp, t_stack **stack_b, int med, t_stack **stack)
 {
+	*stack = (*stack)->next;
 	tmp->prev->next = tmp->next;
 	tmp->next->prev = tmp->prev;
 	tmp->next = NULL;
@@ -56,6 +57,7 @@ void	ft_stack_2_create_add(t_stack *tmp, t_stack **stack_b, int med)
 	}
 	else
 		ft_rb_pb(tmp, stack_b, tmp->num, med);
+	return (1);
 }
 
 int	other_num(int min, int max, int num, int flag)
@@ -63,6 +65,12 @@ int	other_num(int min, int max, int num, int flag)
 	if (flag || (num > min && num < max))
 		return (1);
 	return (0);
+}
+
+void	ra_second(t_stack **stack)
+{
+	(*stack) = (*stack)->next;
+	write(1, "ra\n", 3);
 }
 
 t_stack	*ft_min_max_med(int *arr, t_stack **stack, int ind, t_stack *stack_b)
@@ -76,18 +84,35 @@ t_stack	*ft_min_max_med(int *arr, t_stack **stack, int ind, t_stack *stack_b)
 	i = 0;
 	while (i++ <= ind)
 	{
-		if (flag >= 0 && flag < 2)
+		if (flag == 0)
 			flag += other_num(arr[0], arr[ind], tmp->num, flag);
-		if (tmp->num != arr[0] && tmp->num != arr[ind] && flag > 1)
+		if (tmp->num != arr[0] && tmp->num != arr[ind] && flag++ > 1)
 		{
 			tmp = tmp->next;
-			ft_stack_2_create_add(tmp->prev, &stack_b, arr[ind / 2]);
+			i += ft_stack_2_create_add(tmp->prev, &stack_b, arr[ind / 2], stack);
 		}
 		else
+		{
 			tmp = tmp->next;
+			ra_second(stack);
+		}
 	}
 	ft_circle_2(&stack_b);
 	return (stack_b);
+}
+
+int	ft_compare(int *arr, int n)
+{
+	int	i;
+
+	i = 0;
+	while (i < n)
+	{
+		if (arr[i] < arr[i + 1])
+			return (0);
+		i++;
+	}
+	exit(0);
 }
 
 int	*ft_create_arr(int *arr, t_stack *stack)
@@ -105,7 +130,8 @@ int	*ft_create_arr(int *arr, t_stack *stack)
 	}
 	arr[i] = tmp->num;
 	tmp = tmp->prev;
-	arr = ft_sort_arr(arr, tmp->index);
+	if (!ft_compare(arr, i))
+		arr = ft_sort_arr(arr, tmp->index);
 	return (arr);
 }
 
@@ -201,20 +227,30 @@ void	sa (t_stack **stack)
 	write (1, "sa\n", 3);
 }
 
+void    ft_score_a_b(t_stack **stack);
+
 t_stack	*ft_stack_in_arr(t_stack **stack)
 {
-	int			*arr;
-	t_stack		*stack_b;
-	int			index;
+	int		*arr;
+	t_stack	*stack_b;
+	int		index;
 
 	stack_b = NULL;
 	arr = NULL;
 	index = (*stack)->prev->index;
 	arr = ft_create_arr(arr, *stack);
+	ft_score_a_b(stack);
 	if (index > 2)
 		stack_b = ft_min_max_med(arr, stack, index, stack_b);
+	// printf("Stack_b\n");
+	// ft_print_stack(&stack_b);
+	// printf("Stack_a\n");
+	// ft_print_stack(stack);
 	if (check_a((*stack)->num, (*stack)->next->num, (*stack)->prev->num))
 	 	sa(stack);
 	stack = ft_index_min(stack, arr[0]);
+//	printf("SWAP_A\n");
+//	ft_print_stack(stack);
+//	ft_print_arr(arr, index);
 	return (stack_b);
 }

@@ -25,18 +25,20 @@ typedef struct stack
 	struct stack	*prev;
 }	t_stack;
 
+int 	ft_count_list(t_stack **stack);
 void	ft_print_stack(t_stack **stack);
 void	ft_index(t_stack **stack);
 int		*ft_sort_arr(int *arr, int index);
+void    ft_score_a_b(t_stack **stack);
+void    ft_score(t_stack **stack, t_stack **stack_b);
 t_stack	*ft_stack_in_arr(t_stack **stack);
 void    ra(t_stack **stack, t_stack *tmp);
 void    rra(t_stack **stack, t_stack *tmp);
-
-void    ft_score(t_stack **stack, t_stack **stack_b);
 void	print_error(void);
 char	**ft_split(char const *s, char c);
 char	*ft_copy(char *str, const char *s, char c, int i);
 char	**ft_free(char **str);
-int		ft_count(char const *s, char c);
+//int		ft_count(char const *s, char c);
 char	*ft_inic(char *str, char c, const char *s, int i);
+
 #endif

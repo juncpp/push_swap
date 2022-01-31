@@ -67,15 +67,16 @@ int ft_check_max(t_stack **stack, int num)
 {
     t_stack *tmp;
 
-    tmp = *stack;
+    tmp = (*stack)->next;
+ //   printf ("HEAD = %d   stack_b = %d \n", tmp->num, num);
     while (tmp->next != *stack)
     {
         if (tmp->num > num)
         {
             if (tmp->prev->score >= tmp->score)
-                rra(stack, tmp);
-            else
                 ra(stack, tmp);
+            else
+                rra(stack, tmp);
             return (1);
         }
         tmp = tmp->next;
@@ -93,7 +94,7 @@ void    ra(t_stack **stack, t_stack *tmp)
 
     score = tmp->score;
     while (score-- != 0)
-        write (1,"ra\n",3);
+        write (1,"ra\n", 3);
     *stack = tmp;
 }
 
@@ -107,27 +108,15 @@ void    rra(t_stack **stack, t_stack *tmp)
     *stack = tmp;
 }
 
-// int ft_check_score(int num, t_stack **stack)
-// {
-//     t_stack *tmp;
-
-//     tmp = *stack;
-//     while (tmp->score != num)
-//         tmp = tmp->next;
-//     if (tmp->prev->score >= num)
-//         rra();
-// }
-
 int check_list(t_stack **stack, t_stack **stack_b)
 {
- //   t_stack *tmp_a;
- //   t_stack *tmp_b;
-
+  //  printf ("HEAD = %d   stack_b = %d \n", (*stack)->num, (*stack_b)->num);
     if ((*stack_b)->num < (*stack)->num)
     {
         if ((*stack_b)->num > (*stack)->prev->num)
         {
-           pa(stack, stack_b);
+            pa(stack, stack_b);
+            ft_score_a_b(stack);
             return (1);
         }
     }
@@ -152,11 +141,11 @@ int ft_sorting_final(t_stack **stack)
                 return(0);
             else
             {
-            if (tmp->prev->score >= tmp->score)
-                rra(stack, tmp);
-            else
-                ra(stack, tmp);
-            return (0);
+                if (tmp->prev->score >= tmp->score)
+                   rra(stack, tmp);
+                else
+                   ra(stack, tmp);
+                return (0);
             }
         }
         tmp = tmp->next;
@@ -167,12 +156,12 @@ int ft_sorting_final(t_stack **stack)
 
 void    ft_score(t_stack **stack, t_stack **stack_b)
 {
-    ft_score_a_b(stack);
+     ft_score_a_b(stack);
     if (*stack_b != NULL)
         ft_score_a_b(stack_b);
     while (*stack_b != NULL)
         check_list(stack, stack_b);
+//    printf("Stack_a\n");
     ft_sorting_final(stack);
-//    ft_print_stack(stack);
-
+    ft_print_stack(stack);
 }
