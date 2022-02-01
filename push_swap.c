@@ -183,10 +183,11 @@ int	main(int ag, char **av)
 
 	stack = NULL;
 	if (ag < 2)
-		exit (0);
+		exit (1);
 	else
 	{
 		ft_valid(av, &stack);
+
 		// printf ("Stack \n");
 		// ft_print_stack(&stack);
 		stack_b = ft_stack_in_arr(&stack);

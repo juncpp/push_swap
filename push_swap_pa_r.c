@@ -68,15 +68,16 @@ int ft_check_max(t_stack **stack, int num)
     t_stack *tmp;
 
     tmp = (*stack)->next;
- //   printf ("HEAD = %d   stack_b = %d \n", tmp->num, num);
+//    printf ("HEAD = %d   stack_b = %d \n", tmp->num, num);
     while (tmp->next != *stack)
     {
         if (tmp->num > num)
         {
+ //           printf ("HEAD = %d   stack_b = %d score = %d\n", tmp->num, num, tmp->score);
             if (tmp->prev->score >= tmp->score)
-                ra(stack, tmp);
-            else
                 rra(stack, tmp);
+            else
+                ra(stack, tmp);
             return (1);
         }
         tmp = tmp->next;
@@ -163,5 +164,6 @@ void    ft_score(t_stack **stack, t_stack **stack_b)
         check_list(stack, stack_b);
 //    printf("Stack_a\n");
     ft_sorting_final(stack);
-    ft_print_stack(stack);
+    free_stack(stack);
+//    ft_print_stack(stack);
 }

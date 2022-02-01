@@ -45,7 +45,7 @@ void	ft_rb_pb(t_stack *tmp, t_stack **stack_b, int num, int med)
 
 int	ft_stack_2_create_add(t_stack *tmp, t_stack **stack_b, int med, t_stack **stack)
 {
-	*stack = (*stack)->next;
+	*stack = tmp->next;
 	tmp->prev->next = tmp->next;
 	tmp->next->prev = tmp->prev;
 	tmp->next = NULL;
@@ -82,7 +82,7 @@ t_stack	*ft_min_max_med(int *arr, t_stack **stack, int ind, t_stack *stack_b)
 	flag = 0;
 	tmp = *stack;
 	i = 0;
-	while (i++ <= ind)
+	while (ind - i != 2)
 	{
 		if (flag == 0)
 			flag += other_num(arr[0], arr[ind], tmp->num, flag);
@@ -101,7 +101,7 @@ t_stack	*ft_min_max_med(int *arr, t_stack **stack, int ind, t_stack *stack_b)
 	return (stack_b);
 }
 
-int	ft_compare(int *arr, int n)
+int	ft_compare(int *arr, int n, t_stack *stack)
 {
 	int	i;
 
@@ -112,6 +112,8 @@ int	ft_compare(int *arr, int n)
 			return (0);
 		i++;
 	}
+	free (arr);
+	free_stack(&stack);
 	exit(0);
 }
 
@@ -130,7 +132,7 @@ int	*ft_create_arr(int *arr, t_stack *stack)
 	}
 	arr[i] = tmp->num;
 	tmp = tmp->prev;
-	if (!ft_compare(arr, i))
+	if (!ft_compare(arr, i, stack))
 		arr = ft_sort_arr(arr, tmp->index);
 	return (arr);
 }
@@ -249,6 +251,7 @@ t_stack	*ft_stack_in_arr(t_stack **stack)
 	if (check_a((*stack)->num, (*stack)->next->num, (*stack)->prev->num))
 	 	sa(stack);
 	stack = ft_index_min(stack, arr[0]);
+	free (arr);
 //	printf("SWAP_A\n");
 //	ft_print_stack(stack);
 //	ft_print_arr(arr, index);

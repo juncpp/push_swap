@@ -25,6 +25,9 @@ typedef struct stack
 	struct stack	*prev;
 }	t_stack;
 
+int check_list(t_stack **stack, t_stack **stack_b);
+int ft_sorting_final(t_stack **stack);
+void	free_stack(t_stack **stack);
 int 	ft_count_list(t_stack **stack);
 void	ft_print_stack(t_stack **stack);
 void	ft_index(t_stack **stack);
