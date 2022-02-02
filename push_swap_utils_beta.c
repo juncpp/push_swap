@@ -219,7 +219,7 @@ void	sa (t_stack **stack)
 
 	tmp = (*stack)->next;
 	tmp2 = (*stack)->prev;
-	tmp->next= (*stack);
+	tmp->next = (*stack);
 	(*stack)->next = tmp2;
 	tmp->prev = tmp2;
 	(*stack)->prev = tmp;
@@ -249,7 +249,7 @@ t_stack	*ft_stack_in_arr(t_stack **stack)
 	// printf("Stack_a\n");
 	// ft_print_stack(stack);
 	if (check_a((*stack)->num, (*stack)->next->num, (*stack)->prev->num))
-	 	sa(stack);
+		sa(stack);
 	stack = ft_index_min(stack, arr[0]);
 	free (arr);
 //	printf("SWAP_A\n");
