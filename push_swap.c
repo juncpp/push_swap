@@ -114,18 +114,18 @@ void	free_stack(t_stack **stack)
 	free(*stack);
 }
 
-void	ft_print_stack(t_stack **stack)
-{
-	t_stack	*tmp;
+// void	ft_print_stack(t_stack **stack)
+// {
+// 	t_stack	*tmp;
 
-	tmp = *stack;
-	while (tmp->next != *stack)
-	{
-		printf ("Item a stack: %d  index item = %d  score intem = %d\n", tmp->num, tmp->index, tmp->score);
-		tmp = tmp->next;
-	}
-	printf ("Item a stack: %d  index item = %d  score intem = %d\n", tmp->num, tmp->index, tmp->score);
-}
+// 	tmp = *stack;
+// 	while (tmp->next != *stack)
+// 	{
+// 		printf ("Item a stack: %d  index item = %d  score intem = %d\n", tmp->num, tmp->index, tmp->score);
+// 		tmp = tmp->next;
+// 	}
+// 	printf ("Item a stack: %d  index item = %d  score intem = %d\n", tmp->num, tmp->index, tmp->score);
+// }
 
 t_stack	**ft_circle(t_stack **stack)
 {
@@ -176,68 +176,6 @@ void	ft_index(t_stack **stack)
 	tmp->index = i;
 }
 
-void	pb(t_stack **stack, t_stack **stack_b, t_stack *tmp)
-{
-	*stack = tmp->next;
-	tmp->prev->next = tmp->next;
-	tmp->next->prev = tmp->prev;
-	tmp->next = NULL;
-	tmp->prev = NULL;
-	if (*stack_b == NULL)
-		*stack_b = tmp;
-	else
-	{
-		tmp->next = *stack_b;
-		tmp->prev = *stack_b;
-		(*stack_b)->prev = tmp;
-		(*stack_b)->next = tmp;
-		*stack_b = tmp;
-	}
-	write(1, "pb\n", 3);
-}
-
-void	checkmax(t_stack **stack)
-{
-	t_stack	*tmp;
-
-	tmp = (*stack)->next;
-	if (tmp->num > (*stack)->num)
-	{
-		*stack = tmp;
-		write(1, "ra\n", 3);
-	}
-	if (tmp->next->num > (*stack)->num)
-	{
-		*stack = tmp->next;
-		write(1, "ra\n", 3);
-	}
-}
-
-void	mini_sort(t_stack **stack, t_stack **stack_b)
-{
-	t_stack	*tmp;
-
-	tmp = *stack;
-	pb(stack, stack_b, tmp);
-	tmp = *stack;
-	pb(stack, stack_b, tmp);
-	ft_score_a_b(stack_b);
-	ft_score_a_b(stack);
-	if (check_a((*stack)->num, (*stack)->next->num, (*stack)->prev->num))
-		sa(stack);
-// 	checkmax(stack);
-// 	if ((*stack_b)->num < (*stack_b)->next->num)
-// 		rrb(stack_b, (*stack_b)->next);
-// 	pa(stack, stack_b);
-// 	if (check_a((*stack)->num, (*stack)->next->num, (*stack)->prev->num))
-// 		sa(stack);
-// 	ft_score_a_b(stack_b);
-// 	ft_score_a_b(stack);
-// //	printf("AFDSD= %d\n", (*stack_b)->num);
-// 	check_list(stack, stack_b);
-// 	ft_score_a_b(stack);
-}
-
 int	main(int ag, char **av)
 {
 	t_stack		*stack;
@@ -249,19 +187,8 @@ int	main(int ag, char **av)
 	else
 	{
 		ft_valid(av, &stack);
-		// if (stack->prev->index == 4)
-		// {
-		// 	mini_sort(&stack, &stack_b);
-		// }
-		// else
-		// {
-		// 	stack_b = ft_stack_in_arr(&stack);
-		// 	ft_score(&stack, &stack_b);
-		// }
 		stack_b = ft_stack_in_arr(&stack);
 		ft_score(&stack, &stack_b);
-		// printf ("Stack \n");
-		// ft_print_stack(&stack);
 	}
 	return (0);
 }

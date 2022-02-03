@@ -24,7 +24,6 @@ int	ft_count_list(t_stack **stack)
 		count++;
 		tmp = tmp->next;
 	}
-//    count++;
 	return (count);
 }
 
@@ -80,12 +79,10 @@ int	ft_check_max(t_stack **stack, int num)
 	t_stack	*tmp;
 
 	tmp = (*stack)->next;
-//    printf ("HEAD = %d   stack_b = %d \n", tmp->num, num);
 	while (tmp->next != *stack)
 	{
 		if (tmp->num > num && tmp->prev->num < num)
 		{
-           // printf ("HEAD = %d   stack_b = %d score = %d\n", tmp->num, num, tmp->score);
 			if (tmp->prev->score >= tmp->score)
 				rra(stack, tmp);
 			else
@@ -123,7 +120,6 @@ void	rra(t_stack **stack, t_stack *tmp)
 
 int	check_list(t_stack **stack, t_stack **stack_b)
 {
-//    printf ("HEAD = %d   stack_b = %d \n", (*stack)->num, (*stack_b)->num);
 	if ((*stack_b)->num < (*stack)->num)
 	{
 		if ((*stack_b)->num > (*stack)->prev->num)
@@ -180,10 +176,7 @@ int		count_move_stack_a(t_stack **stack, t_stack **stack_b, int num)
 	while (tmp_a->next != *stack)
 	{
 		if (tmp_a->num > num && tmp_a->prev->num < num)
-		{
- //         printf ("HEAD = %d   stack_b = %d score = %d\n", tmp->num, num, tmp->score);
 			return (tmp_a->score);
-		}
 		tmp_a = tmp_a->next;
 	}
 	return (tmp_a->score);
@@ -197,7 +190,6 @@ t_stack		*count_stack_b_a(t_stack **stack, t_stack **stack_b)
 
 	tmp = (*stack_b)->next;
 	i = count_move_stack_a(stack, &tmp->prev, tmp->prev->num) + tmp->prev->score;
-//	printf ("LOL = %d\n", i); 
 	elem_in_stack_b = tmp->prev;
 	while (tmp != *stack_b)
 	{
@@ -242,28 +234,20 @@ void	check_r_stack_b(t_stack **stack_b, t_stack *tmp)
 
 void	ft_score(t_stack **stack, t_stack **stack_b)
 {
-	int	i;
 	t_stack	*elem_b;
 
-	i = 0;
 	ft_score_a_b(stack);
-//	printf ("Stack_B\n");
-//	ft_print_stack(stack_b);
 	if (*stack_b != NULL)
 		ft_score_a_b(stack_b);
 	while (*stack_b != NULL)
 	{
-	//	check_list(stack, stack_b);
 		elem_b = count_stack_b_a(stack, stack_b);
 		check_r_stack_b(stack_b, elem_b);
 		check_list(stack, stack_b);
 		if (*stack_b != NULL)
 			ft_score_a_b(stack_b);
 	}
-//	printf ("Stack_A\n");
 	ft_sorting_final(stack);
-//	ft_print_stack(stack);
-	free_stack(stack);
-//    ft_print_stack(stack);
+	free_stack(stack);;
 }
   
