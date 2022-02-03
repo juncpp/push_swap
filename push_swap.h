@@ -25,6 +25,18 @@ typedef struct stack
 	struct stack	*prev;
 }	t_stack;
 
+void	check_dublies(int num, t_stack *stack);
+long int	ft_atoi(const char *str);
+int		top_or_botm(int num, int mid);
+int		check_max(t_stack **stack, int num);
+void	rb_pb(t_stack *tmp, t_stack **stack_b, int num, int med);
+int		check_median(int min, int max, int num, int flag);
+void	ra_without_score(t_stack **stack);
+int		ft_compare(int *arr, int n, t_stack *stack);
+int		pb_for_minisort(t_stack *tmp, t_stack **stack_b, t_stack **stack);
+void	next_minisort(t_stack **stack, t_stack **stack_b, int min);
+t_stack	**set_min_index(t_stack **stack, int min);
+void	check_dublies(int num, t_stack *stack);
 void	ft_circle(t_stack **stack);
 void	sa(t_stack **stack);
 int		check_swap(int first, int second, int third);
