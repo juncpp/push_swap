@@ -25,31 +25,31 @@ typedef struct stack
 	struct stack	*prev;
 }	t_stack;
 
+void	ft_circle(t_stack **stack);
 void	sa(t_stack **stack);
-int		check_a(int first, int second, int third);
+int		check_swap(int first, int second, int third);
 void	rrb(t_stack **stack_b, t_stack *tmp);
 void	rb(t_stack **stack_b, t_stack *tmp);
-int		check_list(t_stack **stack, t_stack **stack_b);
-void	check_r_stack_b(t_stack **stack_b, t_stack *tmp);
-t_stack	*count_stack_b_a(t_stack **stack, t_stack **stack_b);
+int		all_in_stack_a(t_stack **stack, t_stack **stack_b);
+void	rb_or_rrb(t_stack **stack_b, t_stack *tmp);
+t_stack	*find_short_way(t_stack **stack, t_stack **stack_b);
 void	pa(t_stack **stack, t_stack **stack_b);
-int		check_list(t_stack **stack, t_stack **stack_b);
+int		all_in_stack_a(t_stack **stack, t_stack **stack_b);
 int		ft_sorting_final(t_stack **stack);
 void	free_stack(t_stack **stack);
 int		ft_count_list(t_stack **stack);
 void	ft_print_stack(t_stack **stack);
-void	ft_index(t_stack **stack);
+void	indexing(t_stack **stack);
 int		*ft_sort_arr(int *arr, int index);
-void	ft_score_a_b(t_stack **stack);
-void	ft_score(t_stack **stack, t_stack **stack_b);
-t_stack	*ft_stack_in_arr(t_stack **stack);
+void	set_score(t_stack **stack);
+void	sorting_main(t_stack **stack, t_stack **stack_b);
+t_stack	*sorting_b(t_stack **stack);
 void	ra(t_stack **stack, t_stack *tmp);
 void	rra(t_stack **stack, t_stack *tmp);
 void	print_error(void);
 char	**ft_split(char const *s, char c);
 char	*ft_copy(char *str, const char *s, char c, int i);
 char	**ft_free(char **str);
-//int		ft_count(char const *s, char c);
 char	*ft_inic(char *str, char c, const char *s, int i);
 
 #endif

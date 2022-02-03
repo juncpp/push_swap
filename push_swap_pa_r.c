@@ -27,7 +27,7 @@ int	ft_count_list(t_stack **stack)
 	return (count);
 }
 
-void	ft_score_a_b(t_stack **stack)
+void	set_score(t_stack **stack)
 {
 	int		i;
 	t_stack	*tmp;
@@ -74,7 +74,7 @@ void	pa(t_stack **stack, t_stack **stack_b)
 	write(1, "pa\n", 3);
 }
 
-int	ft_check_max(t_stack **stack, int num)
+int	check_max(t_stack **stack, int num)
 {
 	t_stack	*tmp;
 
@@ -118,22 +118,22 @@ void	rra(t_stack **stack, t_stack *tmp)
 	*stack = tmp;
 }
 
-int	check_list(t_stack **stack, t_stack **stack_b)
+int	all_in_stack_a(t_stack **stack, t_stack **stack_b)
 {
 	if ((*stack_b)->num < (*stack)->num)
 	{
 		if ((*stack_b)->num > (*stack)->prev->num)
 		{
 			pa(stack, stack_b);
-			ft_score_a_b(stack);
+			set_score(stack);
 			return (1);
 		}
 	}
-	ft_check_max(stack, (*stack_b)->num);
+	check_max(stack, (*stack_b)->num);
 	pa(stack, stack_b);
-	ft_score_a_b(stack);
+	set_score(stack);
 	if (*stack_b != NULL)
-		ft_score_a_b(stack_b);
+		set_score(stack_b);
 	return (0);
 }
 
@@ -182,7 +182,7 @@ int		count_move_stack_a(t_stack **stack, t_stack **stack_b, int num)
 	return (tmp_a->score);
 }
 
-t_stack		*count_stack_b_a(t_stack **stack, t_stack **stack_b)
+t_stack		*find_short_way(t_stack **stack, t_stack **stack_b)
 {
 	int		i;
 	t_stack	*tmp;
@@ -223,7 +223,7 @@ void	rrb(t_stack **stack_b, t_stack *tmp)
 	*stack_b = tmp;
 }
 
-void	check_r_stack_b(t_stack **stack_b, t_stack *tmp)
+void	rb_or_rrb(t_stack **stack_b, t_stack *tmp)
 {
 	if (tmp->prev->score >= tmp->score)
 		rrb(stack_b, tmp);
@@ -232,20 +232,17 @@ void	check_r_stack_b(t_stack **stack_b, t_stack *tmp)
 }
 
 
-void	ft_score(t_stack **stack, t_stack **stack_b)
+void	sorting_main(t_stack **stack, t_stack **stack_b)
 {
-	t_stack	*elem_b;
-
-	ft_score_a_b(stack);
+	set_score(stack);
 	if (*stack_b != NULL)
-		ft_score_a_b(stack_b);
+		set_score(stack_b);
 	while (*stack_b != NULL)
 	{
-		elem_b = count_stack_b_a(stack, stack_b);
-		check_r_stack_b(stack_b, elem_b);
-		check_list(stack, stack_b);
+		rb_or_rrb(stack_b, find_short_way(stack, stack_b));
+		all_in_stack_a(stack, stack_b);
 		if (*stack_b != NULL)
-			ft_score_a_b(stack_b);
+			set_score(stack_b);
 	}
 	ft_sorting_final(stack);
 	free_stack(stack);;

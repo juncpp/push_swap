@@ -28,7 +28,7 @@ void	check_dublies(int num, t_stack *stack)
 	}
 }
 
-t_stack	**ft_stack_create_add(int date, t_stack **stack)
+t_stack	**create_stack_a(int date, t_stack **stack)
 {
 	t_stack	*tmp;
 	t_stack	*p;
@@ -50,16 +50,6 @@ t_stack	**ft_stack_create_add(int date, t_stack **stack)
 		tmp->prev = p;
 	}
 	return (stack);
-}
-
-void	ft_next_back(t_stack **stack)
-{
-	t_stack	*tmp;
-
-	tmp = *stack;
-	while (tmp->next != NULL)
-		tmp = tmp->next;
-	tmp->next = *stack;
 }
 
 int	ft_checknum(unsigned long long int num, int negative)
@@ -127,7 +117,7 @@ void	free_stack(t_stack **stack)
 // 	printf ("Item a stack: %d  index item = %d  score intem = %d\n", tmp->num, tmp->index, tmp->score);
 // }
 
-t_stack	**ft_circle(t_stack **stack)
+void	ft_circle(t_stack **stack)
 {
 	t_stack	*first;
 
@@ -136,32 +126,9 @@ t_stack	**ft_circle(t_stack **stack)
 		first = first->next;
 	first->next = *stack;
 	(*stack)->prev = first;
-	return (stack);
 }
 
-void	ft_valid(char **av, t_stack **stack)
-{
-	int			i;
-	int			j;
-	char		**str;
-
-	j = 0;
-	i = 1;
-	while (av[i] != NULL)
-	{
-		str = ft_split(av[i++], ' ');
-		if (str[j] == 0)
-			print_error();
-		while (str[j] != NULL)
-			stack = ft_stack_create_add(ft_atoi(str[j++]), stack);
-		j = 0;
-		str = ft_free(str);
-	}
-	stack = ft_circle(stack);
-	ft_index(stack);
-}
-
-void	ft_index(t_stack **stack)
+void	indexing(t_stack **stack)
 {
 	t_stack	*tmp;
 	int		i;
@@ -176,6 +143,28 @@ void	ft_index(t_stack **stack)
 	tmp->index = i;
 }
 
+void	validation(char **av, t_stack **stack)
+{
+	int			i;
+	int			j;
+	char		**str;
+
+	j = 0;
+	i = 1;
+	while (av[i] != NULL)
+	{
+		str = ft_split(av[i++], ' ');
+		if (str[j] == 0)
+			print_error();
+		while (str[j] != NULL)
+			stack = create_stack_a(ft_atoi(str[j++]), stack);
+		j = 0;
+		str = ft_free(str);
+	}
+	ft_circle(stack);
+	indexing(stack);
+}
+
 int	main(int ag, char **av)
 {
 	t_stack		*stack;
@@ -186,9 +175,9 @@ int	main(int ag, char **av)
 		exit (1);
 	else
 	{
-		ft_valid(av, &stack);
-		stack_b = ft_stack_in_arr(&stack);
-		ft_score(&stack, &stack_b);
+		validation(av, &stack);
+		stack_b = sorting_b(&stack);
+		sorting_main(&stack, &stack_b);
 	}
 	return (0);
 }

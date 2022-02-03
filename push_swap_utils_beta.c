@@ -1,31 +1,31 @@
 #include "push_swap.h"
 
-void	ft_circle_2(t_stack **stack_b)
-{
-	t_stack	*first;
+// void	ft_circle_2(t_stack **stack_b)
+// {
+// 	t_stack	*first;
 
-	first = *stack_b;
-	while (first->next != NULL)
-		first = first->next;
-	first->next = *stack_b;
-	(*stack_b)->prev = first;
-	ft_index(stack_b);
-}
+// 	first = *stack_b;
+// 	while (first->next != NULL)
+// 		first = first->next;
+// 	first->next = *stack_b;
+// 	(*stack_b)->prev = first;
+// 	indexing(stack_b);
+// }
 
 
-int	check_med(int num, int mid)
+int	top_or_botm(int num, int mid)
 {
 	if (num > mid)
 		return (1);
 	return (0);
 }
 
-void	ft_rb_pb(t_stack *tmp, t_stack **stack_b, int num, int med)
+void	rb_pb(t_stack *tmp, t_stack **stack_b, int num, int med)
 {
 	t_stack	*p;
 
 	p = *stack_b;
-	if (check_med(num, med))
+	if (top_or_botm(num, med))
 	{
 		while (p->next != NULL)
 				p = p->next;
@@ -43,7 +43,7 @@ void	ft_rb_pb(t_stack *tmp, t_stack **stack_b, int num, int med)
 	}
 }
 
-int	ft_stack_2_create_add(t_stack *tmp, t_stack **stack_b, int med, t_stack **stack)
+int	all_with_stack_b(t_stack *tmp, t_stack **stack_b, int med, t_stack **stack)
 {
 	*stack = tmp->next;
 	tmp->prev->next = tmp->next;
@@ -56,24 +56,24 @@ int	ft_stack_2_create_add(t_stack *tmp, t_stack **stack_b, int med, t_stack **st
 		write(1, "pb\n", 3);
 	}
 	else
-		ft_rb_pb(tmp, stack_b, tmp->num, med);
+		rb_pb(tmp, stack_b, tmp->num, med);
 	return (1);
 }
 
-int	other_num(int min, int max, int num, int flag)
+int	check_median(int min, int max, int num, int flag)
 {
 	if (flag || (num > min && num < max))
 		return (1);
 	return (0);
 }
 
-void	ra_second(t_stack **stack)
+void	ra_without_score(t_stack **stack)
 {
 	(*stack) = (*stack)->next;
 	write(1, "ra\n", 3);
 }
 
-t_stack	*ft_min_max_med(int *arr, t_stack **stack, int ind, t_stack *stack_b)
+t_stack	*create_stack_b(int *arr, t_stack **stack, int ind, t_stack *stack_b)
 {
 	int			i;
 	t_stack		*tmp;
@@ -85,19 +85,19 @@ t_stack	*ft_min_max_med(int *arr, t_stack **stack, int ind, t_stack *stack_b)
 	while (ind - i != 2)
 	{
 		if (flag == 0)
-			flag += other_num(arr[0], arr[ind], tmp->num, flag);
+			flag += check_median(arr[0], arr[ind], tmp->num, flag);
 		if (tmp->num != arr[0] && tmp->num != arr[ind] && flag++ > 1)
 		{
 			tmp = tmp->next;
-			i += ft_stack_2_create_add(tmp->prev, &stack_b, arr[ind / 2], stack);
+			i += all_with_stack_b(tmp->prev, &stack_b, arr[ind / 2], stack);
 		}
 		else
 		{
 			tmp = tmp->next;
-			ra_second(stack);
+			ra_without_score(stack);
 		}
 	}
-	ft_circle_2(&stack_b);
+	ft_circle(&stack_b);
 	return (stack_b);
 }
 
@@ -171,7 +171,7 @@ void	ft_print_arr(int *arr, int n)
 		printf("arr_sort = %d\n", arr[i++]);
 }
 
-int	check_a(int first, int second, int third)
+int	check_swap(int first, int second, int third)
 {
 	if (first > second)
 	{
@@ -194,7 +194,7 @@ int	check_a(int first, int second, int third)
 	return (0);
 }
 
-t_stack	**ft_index_min(t_stack **stack, int min)
+t_stack	**set_min_index(t_stack **stack, int min)
 {
 	t_stack	*tmp;
 
@@ -229,9 +229,9 @@ void	sa (t_stack **stack)
 	write (1, "sa\n", 3);
 }
 
-void    ft_score_a_b(t_stack **stack);
+void    set_score(t_stack **stack);
 
-int	pb_in_stack_b(t_stack *tmp, t_stack **stack_b, t_stack **stack)
+int	pb_for_minisort(t_stack *tmp, t_stack **stack_b, t_stack **stack)
 {
 	*stack = tmp->next;
 	tmp->prev->next = tmp->next;
@@ -264,35 +264,35 @@ t_stack	*minisort(int *arr, t_stack **stack, int index, t_stack **stack_b)
 		if (tmp->num != arr[index] && tmp->num != arr[0])
 		{
 			tmp = tmp->next;
-			i += pb_in_stack_b(tmp->prev, stack_b, stack);
+			i += pb_for_minisort(tmp->prev, stack_b, stack);
 		}
 		else
 		{
 			tmp = tmp->next;
-			ra_second(stack);
+			ra_without_score(stack);
 		}
 	}
-	if (check_a((*stack)->num, (*stack)->next->num, (*stack)->prev->num))
+	if (check_swap((*stack)->num, (*stack)->next->num, (*stack)->prev->num))
 		sa(stack);
-	ft_score_a_b(stack);
-	ft_score_a_b(stack_b);
+	set_score(stack);
+	set_score(stack_b);
 	return (*stack_b);
 }
 
-void	ft_tmp(t_stack **stack, t_stack **stack_b, int min)
+void	next_minisort(t_stack **stack, t_stack **stack_b, int min)
 {
 	while (*stack_b != NULL)
 	{
-		check_r_stack_b(stack_b, count_stack_b_a(stack, stack_b));
-		check_list(stack, stack_b);
+		rb_or_rrb(stack_b, find_short_way(stack, stack_b));
+		all_in_stack_a(stack, stack_b);
 		if (*stack_b != NULL)
-			ft_score_a_b(stack_b);
+			set_score(stack_b);
 	}
-	stack = ft_index_min(stack, min);
+	stack = set_min_index(stack, min);
 	ft_sorting_final(stack);
 }
 
-t_stack	*ft_stack_in_arr(t_stack **stack)
+t_stack	*sorting_b(t_stack **stack)
 {
 	int		*arr;
 	t_stack	*stack_b;
@@ -302,20 +302,20 @@ t_stack	*ft_stack_in_arr(t_stack **stack)
 	arr = NULL;
 	index = (*stack)->prev->index;
 	arr = ft_create_arr(arr, *stack);
-	ft_score_a_b(stack);
+	set_score(stack);
 	if (index > 2 && index != 4)
-		stack_b = ft_min_max_med(arr, stack, index, stack_b);
+		stack_b = create_stack_b(arr, stack, index, stack_b);
 	else if (index == 4)
 	{
 		stack_b = minisort(arr, stack, index, &stack_b);
-		ft_tmp(stack, &stack_b, arr[0]);
+		next_minisort(stack, &stack_b, arr[0]);
 		free (arr);
 		free_stack(stack);
 		exit(0);
 	}
-	if (check_a((*stack)->num, (*stack)->next->num, (*stack)->prev->num))
+	if (check_swap((*stack)->num, (*stack)->next->num, (*stack)->prev->num))
 		sa(stack);
-	stack = ft_index_min(stack, arr[0]);
+	stack = set_min_index(stack, arr[0]);
 	free (arr);
 	return (stack_b);
 }
