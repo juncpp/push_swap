@@ -1,16 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_utils_beta.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmeredit <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/04 12:30:18 by mmeredit          #+#    #+#             */
+/*   Updated: 2022/02/04 12:30:21 by mmeredit         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
-
-// void	ft_circle_2(t_stack **stack_b)
-// {
-// 	t_stack	*first;
-
-// 	first = *stack_b;
-// 	while (first->next != NULL)
-// 		first = first->next;
-// 	first->next = *stack_b;
-// 	(*stack_b)->prev = first;
-// 	indexing(stack_b);
-// }
 
 int	all_with_stack_b(t_stack *tmp, t_stack **stack_b, int med, t_stack **stack)
 {
@@ -76,8 +76,6 @@ int	*ft_create_arr(int *arr, t_stack *stack)
 		arr = ft_sort_arr(arr, tmp->index);
 	return (arr);
 }
-
-// void    set_score(t_stack **stack);
 
 t_stack	*minisort(int *arr, t_stack **stack, int index, t_stack **stack_b)
 {

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_func_game_a.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmeredit <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/04 12:31:25 by mmeredit          #+#    #+#             */
+/*   Updated: 2022/02/04 12:31:27 by mmeredit         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	ra_without_score(t_stack **stack)
@@ -6,7 +18,7 @@ void	ra_without_score(t_stack **stack)
 	write(1, "ra\n", 3);
 }
 
-void	sa (t_stack **stack)
+void	sa(t_stack **stack)
 {
 	t_stack	*tmp;
 	t_stack	*tmp2;

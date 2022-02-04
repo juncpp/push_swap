@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_func_game_b.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmeredit <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/04 12:31:17 by mmeredit          #+#    #+#             */
+/*   Updated: 2022/02/04 12:31:18 by mmeredit         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	rb_pb(t_stack *tmp, t_stack **stack_b, int num, int med)
@@ -22,7 +34,6 @@ void	rb_pb(t_stack *tmp, t_stack **stack_b, int num, int med)
 		write(1, "pb\n", 3);
 	}
 }
-
 
 int	pb_for_minisort(t_stack *tmp, t_stack **stack_b, t_stack **stack)
 {

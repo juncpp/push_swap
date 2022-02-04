@@ -1,12 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_func_valid.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmeredit <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/04 12:30:49 by mmeredit          #+#    #+#             */
+/*   Updated: 2022/02/04 12:30:52 by mmeredit         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	check_dublies(int num, t_stack *stack)
 {
-	while (stack != NULL)
+	t_stack	*tmp;
+
+	tmp = stack;
+	while (tmp != NULL)
 	{
-		if (num == stack->num)
+		if (num == tmp->num)
+		{
+			ft_circle(&stack);
+			free_stack(&stack);
 			print_error();
-		stack = stack->next;
+		}
+		tmp = tmp->next;
 	}
 }
 

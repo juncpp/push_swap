@@ -18,7 +18,7 @@ void	print_error(void)
 	exit(0);
 }
 
-t_stack	**create_stack_a(int date, t_stack **stack)
+t_stack	**create_stack_a(int date, t_stack **stack, char **str)
 {
 	t_stack	*tmp;
 	t_stack	*p;
@@ -27,7 +27,11 @@ t_stack	**create_stack_a(int date, t_stack **stack)
 	p = *stack;
 	tmp = malloc(sizeof(t_stack));
 	if (!tmp)
-		return (NULL);
+	{
+		ft_free(str);
+		free_stack(stack);
+		print_error();
+	}
 	tmp->next = NULL;
 	tmp->num = date;
 	if (p == NULL)
@@ -46,31 +50,17 @@ void	free_stack(t_stack **stack)
 {
 	t_stack	*tmp;
 
-	tmp = *stack;
-	*stack = (*stack)->prev;
-	(*stack)->next = NULL;
-	*stack = tmp;
-	while ((*stack)->next != NULL)
+	if (*stack != NULL)
 	{
-		*stack = (*stack)->next;
+		tmp = (*stack)->next;
+		while (tmp != *stack)
+		{
+			tmp = tmp->next;
+			free(tmp->prev);
+		}
 		free(tmp);
-		tmp = *stack;
 	}
-	free(*stack);
 }
-
-// void	ft_print_stack(t_stack **stack)
-// {
-// 	t_stack	*tmp;
-
-// 	tmp = *stack;
-// 	while (tmp->next != *stack)
-// 	{
-// 		printf ("Item a stack: %d  index item = %d  score intem = %d\n", tmp->num, tmp->index, tmp->score);
-// 		tmp = tmp->next;
-// 	}
-// 	printf ("Item a stack: %d  index item = %d  score intem = %d\n", tmp->num, tmp->index, tmp->score);
-// }
 
 void	validation(char **av, t_stack **stack)
 {
@@ -83,10 +73,13 @@ void	validation(char **av, t_stack **stack)
 	while (av[i] != NULL)
 	{
 		str = ft_split(av[i++], ' ');
-		if (str[j] == 0)
+		if (str[j] == 0 || str == NULL)
+		{
+			str = ft_free(str);
 			print_error();
+		}
 		while (str[j] != NULL)
-			stack = create_stack_a(ft_atoi(str[j++]), stack);
+			stack = create_stack_a(ft_atoi(str[j++]), stack, str);
 		j = 0;
 		str = ft_free(str);
 	}
@@ -99,11 +92,11 @@ int	main(int ag, char **av)
 	t_stack		*stack;
 	t_stack		*stack_b;
 
-	stack = NULL;
 	if (ag < 2)
-		exit (1);
+		return (0);
 	else
 	{
+		stack = NULL;
 		validation(av, &stack);
 		stack_b = sorting_b(&stack);
 		sorting_main(&stack, &stack_b);

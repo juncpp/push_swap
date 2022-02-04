@@ -6,7 +6,7 @@
 /*   By: mmeredit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 14:01:39 by mmeredit          #+#    #+#             */
-/*   Updated: 2022/02/02 14:01:41 by mmeredit         ###   ########.fr       */
+/*   Updated: 2022/02/04 14:53:05 by mmeredit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	ft_sorting_final(t_stack **stack)
 	return (0);
 }
 
-int		count_move_stack_a(t_stack **stack, t_stack **stack_b, int num)
+int	count_move_stack_a(t_stack **stack, t_stack **stack_b, int num)
 {
 	t_stack	*tmp_a;
 
@@ -76,14 +76,15 @@ int		count_move_stack_a(t_stack **stack, t_stack **stack_b, int num)
 	return (tmp_a->score);
 }
 
-t_stack		*find_short_way(t_stack **stack, t_stack **stack_b)
+t_stack	*find_short_way(t_stack **stack, t_stack **stack_b)
 {
 	int		i;
 	t_stack	*tmp;
 	t_stack	*elem_in_stack_b;
 
 	tmp = (*stack_b)->next;
-	i = count_move_stack_a(stack, &tmp->prev, tmp->prev->num) + tmp->prev->score;
+	i = count_move_stack_a(stack, &tmp->prev, tmp->prev->num) + \
+		tmp->prev->score;
 	elem_in_stack_b = tmp->prev;
 	while (tmp != *stack_b)
 	{
@@ -96,7 +97,6 @@ t_stack		*find_short_way(t_stack **stack, t_stack **stack_b)
 	}
 	return (elem_in_stack_b);
 }
-
 
 void	sorting_main(t_stack **stack, t_stack **stack_b)
 {
@@ -111,6 +111,5 @@ void	sorting_main(t_stack **stack, t_stack **stack_b)
 			set_score(stack_b);
 	}
 	ft_sorting_final(stack);
-	free_stack(stack);;
+	free_stack(stack);
 }
-  
