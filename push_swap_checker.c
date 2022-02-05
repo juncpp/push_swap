@@ -320,7 +320,7 @@ int check_ok(int index, int i)
         if (i <= 3)
             return (1);
     }
-    if (index >= 100 && index < 500)
+    if (index >= 6 && index < 500)
     {
         if (i <= 1500)
             return (1);
